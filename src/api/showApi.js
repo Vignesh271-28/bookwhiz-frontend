@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils/jwtUtil";
-import { API } from "../../src/config/api";
+import { API } from '../config/api';
 
 // const BASE = "http://localhost:8080/api/user";
 
