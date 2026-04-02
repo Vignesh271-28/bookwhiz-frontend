@@ -1,0 +1,60 @@
+/* .admin-layout {
+    display: flex;
+    height: 100vh;
+    background: #f8fafc;
+  }
+  
+  .sidebar {
+    width: 240px;
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar nav a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+  }
+  
+  .sidebar nav a.active {
+    background: #2563eb;
+    color: white;
+  }
+  
+  .admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .topbar {
+    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .up { color: green; }
+  .down { color: red; }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  } */
