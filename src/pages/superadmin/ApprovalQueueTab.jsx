@@ -56,7 +56,7 @@ export default function ApprovalQueueTab({ defaultFilter = "PENDING", showTabs =
 
   const load = () => {
     setLoading(true);
-    axios.get(API.SUPER_ADMIN, { headers: auth() })
+    axios.get(`${API.SUPER_ADMIN}/requests`, { headers: auth() })
       .then(r => setRequests(r.data ?? []))
       .catch(() => toast.error("Failed to load requests"))
       .finally(() => setLoading(false));
@@ -89,7 +89,7 @@ export default function ApprovalQueueTab({ defaultFilter = "PENDING", showTabs =
   const handleApprove = async (id) => {
     setActing(id + "approve");
     try {
-      await axios.post(`${API.SUPER_ADMIN}/${id}/approve`, {}, { headers: auth() });
+      await axios.post(`${API.SUPER_ADMIN}/requests/${id}/approve`, {}, { headers: auth() });
       toast.success("✅ Approved & created!");
       load();
     } catch (e) {
@@ -115,7 +115,7 @@ export default function ApprovalQueueTab({ defaultFilter = "PENDING", showTabs =
     }
     setRejecting(true);
     try {
-      await axios.post(`${API.SUPER_ADMIN}/${rejectId}/reject`,
+      await axios.post(`${API.SUPER_ADMIN}/requests/${rejectId}/reject`,
         { note: rejectNote.trim() }, { headers: auth() });
       toast.success("Request rejected.");
       load();
