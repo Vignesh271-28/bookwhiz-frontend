@@ -23,7 +23,6 @@ import { toast } from "react-toastify";
 import { API  } from "../../config/api.js";
 
 
-
 // const API  = "http://localhost:8080/api/superadmin";
 // const UAPI = "http://localhost:8080/api/user";
 const auth = () => ({ Authorization: `Bearer ${getToken()}` });
@@ -348,7 +347,7 @@ function UsersTab() {
   useEffect(() => { load(); }, []);
 
   const countRole = (r) => users.filter(u => userHasRole(u, r)).length;
-  const filtered = applyFilters(users, "users", filters).filter(u => {
+  const filtered = applyFilters(Array.isArray(users) ? users : [], "users", filters).filter(u => {
     const name  = (colFilters.name || userSearch || "").toLowerCase();
     const email = (colFilters.email || "").toLowerCase();
     const roleOk = colFilters.role === "ALL" || (() => {
@@ -725,13 +724,13 @@ export function MoviesTab() {
     setLoading(true);
     setError(null);
     fetchMovies()
-      .then(r => setMovies(r.data))
+      .then(r => setMovies(Array.isArray(r.data) ? r.data : (r.data?.content ?? [])))
       .catch(e => setError(e.response?.data?.message ?? e.message))
       .finally(() => setLoading(false));
   };
   useEffect(() => { load(); }, []);
 
-  const fpFiltered = applyFilters(movies, "movies", filters);
+  const fpFiltered = applyFilters(Array.isArray(movies) ? movies : [], "movies", filters);
   const filtered = fpFiltered.filter(m => {
     const ms = m.title?.toLowerCase().includes(search.toLowerCase()) ||
                m.genre?.toLowerCase().includes(search.toLowerCase());
@@ -1045,7 +1044,7 @@ export function ShowsTab() {
   };
 
   // ── Apply filters + search ──────────────────────────────────
-  const fpShows    = applyFilters(shows, "shows", showFilters);
+  const fpShows    = applyFilters(Array.isArray(shows) ? shows : [], "shows", showFilters);
   const fpFiltered = showSearch.trim()
     ? fpShows.filter(s =>
         (s.movie?.title ?? s.movieTitle ?? "").toLowerCase().includes(showSearch.toLowerCase()) ||
@@ -1285,7 +1284,7 @@ export function VenuesTab() {
   };
   useEffect(() => { load(); }, []);
 
-  const fpVenues  = applyFilters(venues, "venues", venueFilters);
+  const fpVenues  = applyFilters(Array.isArray(venues) ? venues : [], "venues", venueFilters);
   const filtered = fpVenues.filter(v =>
     v.name?.toLowerCase().includes(search.toLowerCase()) ||
     v.city?.toLowerCase().includes(search.toLowerCase())
@@ -1647,7 +1646,7 @@ function Spinner({ color = "violet" }) {
 // 🤝 PARTNER APPLICATIONS
 // ════════════════════════════════════════════════════════════
 function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
-  const PARTNER_API = API.PARTNER_API;
+  const PARTNER_API = "http://localhost:8080/api/superadmin/partners";
   const [apps,    setApps]    = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter,  setFilter]  = useState(defaultFilter);
@@ -1668,7 +1667,7 @@ function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
   };
   useEffect(() => { load(); }, []);
 
-  const fpApps = applyFilters(apps, "partners", partnerFilters);
+  const fpApps = applyFilters(Array.isArray(apps) ? apps : [], "partners", partnerFilters);
   const searchApps = partnerSearch.trim()
     ? fpApps.filter(a =>
         a.name?.toLowerCase().includes(partnerSearch.toLowerCase()) ||

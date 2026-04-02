@@ -457,10 +457,10 @@ export const TAB_CONFIGS = {
         key: "roles", label: "Role",
         type: "multi",
         options: [
-          { value: "USER",        label: " User"        },
-          { value: "MANAGER",     label: " Manager"     },
-          { value: "ADMIN",       label: " Admin"       },
-          { value: "SUPER_ADMIN", label: " Super Admin" },
+          { value: "USER",        label: "👤 User"        },
+          { value: "MANAGER",     label: "🏪 Manager"     },
+          { value: "ADMIN",       label: "🛠️ Admin"       },
+          { value: "SUPER_ADMIN", label: "👑 Super Admin" },
         ],
       },
     ],
@@ -595,9 +595,9 @@ export const TAB_CONFIGS = {
         key: "types", label: "Request Type",
         type: "multi",
         options: [
-          { value: "MOVIE", label: " Movie"  },
-          { value: "VENUE", label: " Venue"  },
-          { value: "USER",  label: " User"   },
+          { value: "MOVIE", label: "🎬 Movie"  },
+          { value: "VENUE", label: "🏛️ Venue"  },
+          { value: "USER",  label: "👤 User"   },
         ],
       },
     ],
@@ -648,7 +648,8 @@ export const TAB_CONFIGS = {
 // applyFilters — apply filter state to a data array
 // ══════════════════════════════════════════════════════════════════
 export function applyFilters(data, tab, filters) {
-  if (!data || !filters) return data;
+  if (!data || !filters) return data ?? [];
+  if (!Array.isArray(data)) return [];
   let result = [...data];
 
   const today    = new Date().toISOString().split("T")[0];
