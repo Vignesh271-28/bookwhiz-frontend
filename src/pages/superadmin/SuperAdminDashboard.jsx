@@ -328,7 +328,7 @@ function UsersTab() {
     Promise.all([
       fetchAllUsers(),
       axios.get(API.SUPER_ADMIN_ROLES, { headers: auth() }).catch(() => ({ data: [] })),
-      axios.get(`${API.SUPER_ADMIN}/assignable-users`, { headers: auth() }).catch(() => ({ data: [] })),
+      axios.get(`${API.SUPER_ADMIN_ROLES}/assignable-users`, { headers: auth() }).catch(() => ({ data: [] })),
     ]).then(([u, r, au]) => {
         setUsers(Array.isArray(u.data) ? u.data : (u.data?.content ?? []));
         setCustomRoles(r.data ?? []);
@@ -1646,7 +1646,7 @@ function Spinner({ color = "violet" }) {
 // 🤝 PARTNER APPLICATIONS
 // ════════════════════════════════════════════════════════════
 function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
-  const PARTNER_API = "http://localhost:8080/api/superadmin/partners";
+  // const PARTNER_API = "http://localhost:8080/api/superadmin/partners";
   const [apps,    setApps]    = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter,  setFilter]  = useState(defaultFilter);
@@ -1660,7 +1660,7 @@ function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
 
   const load = () => {
     setLoading(true);
-    axios.get(PARTNER_API, { headers: auth() })
+    axios.get(API.PARTNER_API, { headers: auth() })
       .then(r => setApps(r.data ?? []))
       .catch(() => toast.error("Failed to load partner applications"))
       .finally(() => setLoading(false));
@@ -1682,8 +1682,8 @@ function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
     const id = confirmApprove;
     setActing(id);
     try {
-      await axios.post(`${PARTNER_API}/${id}/approve`, {}, { headers: auth() });
-      toast.success("✅ Partner approved! Account created.");
+      await axios.post(`${API.PARTNER_API}/${id}/approve`, {}, { headers: auth() });
+      toast.success(" Partner approved! Account created.");
       load();
     } catch (e) {
       toast.error(e.response?.data?.error ?? "Failed to approve");
@@ -1694,7 +1694,7 @@ function PartnerApprovalsTab({ defaultFilter = "PENDING", showTabs = true }) {
     if (!rejectNote.trim()) { setNoteErr("Reason is required"); return; }
     setActing(rejectId);
     try {
-      await axios.post(`${PARTNER_API}/${rejectId}/reject`,
+      await axios.post(`${API.PARTNER_API}/${rejectId}/reject`,
         { note: rejectNote }, { headers: auth() });
       toast.success("Application rejected.");
       load();
