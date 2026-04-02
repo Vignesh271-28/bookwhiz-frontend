@@ -42,7 +42,7 @@ const deleteUser         = (id)    => axios.delete(`${API.SUPER_ADMIN}/users/${i
 const fetchPendingEvents = ()      => axios.get(`${API.SUPER_ADMIN}/events/pending`,          { headers: auth() });
 const approveEvent       = (id)    => axios.put(`${API.SUPER_ADMIN}/events/${id}/approve`, {},{ headers: auth() });
 const rejectEvent        = (id)    => axios.put(`${API.SUPER_ADMIN}/events/${id}/reject`,  {},{ headers: auth() });
-const fetchMovies        = ()      => axios.get(`${API.USI.SUPER_ADMINR}/movies`,                 { headers: auth() });
+const fetchMovies        = ()      => axios.get(`${API.SUPER_ADMIN}/movies`,                 { headers: auth() });
 const createMovie        = (d)     => axios.post(`${API.SUPER_ADMIN}/movies`,            d,   { headers: auth() });
 const updateMovie        = (id, d) => axios.put(`${API.SUPER_ADMIN}/movies/${id}`,       d,   { headers: auth() });
 const deleteMovie        = (id)    => axios.delete(`${API.SUPER_ADMIN}/movies/${id}`,         { headers: auth() });
