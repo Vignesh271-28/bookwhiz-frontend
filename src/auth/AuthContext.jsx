@@ -15,8 +15,7 @@ export function AuthProvider({ children }) {
       return;
     }
 
-    api.get("/auth/me")
-      .then(res => {
+    api.get("/api/auth/me")      .then(res => {
         setUser({
           email: res.data.email,
           roles: res.data.roles.map(r => r.name)
@@ -32,7 +31,7 @@ export function AuthProvider({ children }) {
   const login = (token) => {
     localStorage.setItem("token", token);
 
-    api.get("/auth/me").then(res => {
+   api.get("/api/auth/me").then(res => {
       setUser({
         email: res.data.email,
         roles: res.data.roles.map(r => r.name)
