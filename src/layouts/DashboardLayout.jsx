@@ -15,7 +15,8 @@ import {
   TrendingUp, UserCheck, Radio, Wallet, Star, Settings
 } from "lucide-react";
 
-
+// ✅ ADD THIS — must be before NAV object
+const ic = (Icon, size = 16) => <Icon size={size} strokeWidth={1.8} />;
 const NAV = {
   SUPER_ADMIN: {
     brand:    "BookWhiz",
