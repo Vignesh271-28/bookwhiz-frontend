@@ -2,7 +2,7 @@ import axios from "axios";
 import { API } from "../../src/config/api";
 
 const api = axios.create({
-  baseURL: API.API_URL
+  baseURL: import.meta.env.VITE_API_BASE_URL || API.BASE
      
 });
 
