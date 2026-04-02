@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { fetchShowsByMovie } from "../../api/ShowApi";
+import { fetchShowsByMovie } from "../../api/showApi";
 import { getToken, getUserFromToken } from "../../utils/jwtUtil";
 import { toast } from "react-toastify";
 import { API }  from "../../config/api";
